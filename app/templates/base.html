@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device_width" , initial-scale="1.0">
+    <link rel="stylesheet" href="../static/bootstrap.css">
+    <title>
+        {% block title %}{{ title }}{% endblock %}
+    </title>
+</head>
+
+<body class="bg-secondary">
+<!-- Wrap the whole page in a div, this uses the container class which sets it to a fixed size depending on the media query-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ url_for('main.index')}}">Rain Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('main.index')}}">Home<span class="sr-only"></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('main.signup')}}">Sign up</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search for a city" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="text-center">
+    <img class="rounded-0" src="../static/rain.jpg" alt="rain image" width="380" height="120">
+    <h1 class="display-3">rain forecast blog</h1>
+</div>
+
+<div role=main class="container-fluid">
+    {% block content %}
+    {% endblock %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<footer class="text-center">
+    <hr>
+    <p>Paragraph is from Wikipedia</p>
+</footer>
+</body>
+</html>
