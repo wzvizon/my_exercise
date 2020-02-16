@@ -5,25 +5,24 @@
     <div class="col-md">
     </div>
     <div class="col-md">
-    </div>
-    <div class="col-md">
-            {% if form.errors %}
-                <p><strong>The form contains errors:</strong>
-                <ul>
-                    {% for error in form.errors %}
-                    <li>{{ error }}</li>
+         {% if form.errors %}
+            <ul class="alert-warning list-unstyled">
+                {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                    {% for error in field_errors %}
+                        <li>{{ form[field_name].label }}: {{ error }}</li>
                     {% endfor %}
-                </ul>
-            {% endif %}
-            <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <p>{{ form.username.label }}<br>{{ form.username(size=32) }}</p>
-            <p>{{ form.password.label }}<br>{{ form.password }}</p>
-            <p>{{ form.submit() }}</p>
-            <p>{{ form.email.label }}<br>{{ form.email(size=32) }}</p>
-            <p>{{ form.subscribe() }}</p>
-            </form>
+                {% endfor %}
+             </ul>
+        {% endif %}
     </div>
+    <form action="" method="post" novalidate>
+        {{ form.csrf_token }}
+        {{ form.username.label }}{{ form.username(class="form-control") }}
+        {{ form.email.label }}{{ form.email(class="form-control") }}
+        {{ form.password.label }}{{ form.password(class="form-control") }}
+        {{ form.confirm.label }} {{ form.confirm(class="form-control") }}
+        <br>{{ form.submit(class_="btn btn-primary") }}
+    </form>
     <div class="col-md">
     </div>
     <div class="col-md">

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Rain Blog {% endblock %}
+{% block content %}
+   <h2>User list</h2>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.user_id}}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
